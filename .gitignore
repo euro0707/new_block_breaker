@@ -1,0 +1,27 @@
+# 一般的な無視ファイル
+node_modules/
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# エディタ関連
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ビルド関連
+dist/
+build/
+.cache/
+.netlify/
+
+# ログファイル
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs
+*.log
