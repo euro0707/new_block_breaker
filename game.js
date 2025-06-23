@@ -1,6 +1,6 @@
 // キャンバスとコンテキストの設定
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
+let canvas;
+let ctx;
 
 // ゲームの設定
 const PADDLE_WIDTH = 120;
@@ -416,6 +416,12 @@ function initGame() {
   gameCleared = false;
 }
 
-// ゲームを初期化して開始
-initGame();
-draw();
+// HTMLが完全に読み込まれた後にゲームを初期化
+window.onload = function() {
+  canvas = document.getElementById('gameCanvas');
+  ctx = canvas.getContext('2d');
+  
+  // ゲームを初期化して開始
+  initGame();
+  draw();
+};
