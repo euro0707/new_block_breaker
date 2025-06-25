@@ -418,10 +418,27 @@ function initGame() {
 
 // HTMLが完全に読み込まれた後にゲームを初期化
 window.onload = function() {
-  canvas = document.getElementById('gameCanvas');
-  ctx = canvas.getContext('2d');
-  
-  // ゲームを初期化して開始
-  initGame();
-  draw();
+  try {
+    console.log('ゲーム初期化開始');
+    canvas = document.getElementById('gameCanvas');
+    
+    if (!canvas) {
+      console.error('キャンバス要素が見つかりません');
+      document.body.innerHTML = '<p style="color: white; text-align: center; margin-top: 50px;">エラー: キャンバスの読み込みに失敗しました。ページを再読み込みしてください。</p>';
+      return;
+    }
+    
+    console.log('キャンバス要素を取得しました');
+    ctx = canvas.getContext('2d');
+    console.log('描画コンテキストを取得しました');
+    
+    // ゲームを初期化して開始
+    initGame();
+    console.log('ゲーム初期化完了');
+    draw();
+    console.log('描画処理開始');
+  } catch (error) {
+    console.error('ゲーム初期化エラー:', error);
+    document.body.innerHTML = '<p style="color: white; text-align: center; margin-top: 50px;">エラー: ' + error.message + '</p>';
+  }
 };
