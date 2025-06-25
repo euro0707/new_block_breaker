@@ -60,13 +60,13 @@ function initBlocks() {
   }
 }
 
-// パドルの初期位置
-let paddleX = (canvas.width - PADDLE_WIDTH) / 2;
-const paddleY = canvas.height - 30; // 下から30pxの位置
+// パドルとボールの初期位置（キャンバス取得前は仮の値）
+let paddleX = 0;
+let paddleY; // キャンバスが取得できた後に計算
 
 // ボールの初期位置と速度
-let ballX = canvas.width / 2;
-let ballY = canvas.height / 2;
+let ballX = 0;
+let ballY = 0;
 let ballSpeedX = 2; // X方向の速度を遅く調整
 let ballSpeedY = -2; // Y方向の速度を遅く調整
 
@@ -431,7 +431,13 @@ window.onload = function() {
     console.log('キャンバス要素を取得しました');
     ctx = canvas.getContext('2d');
     console.log('描画コンテキストを取得しました');
-    
+
+    // キャンバスに依存する座標をここで初期化
+    paddleY = canvas.height - 30;
+    paddleX = (canvas.width - PADDLE_WIDTH) / 2;
+    ballX = canvas.width / 2;
+    ballY = canvas.height / 2;
+
     // ゲームを初期化して開始
     initGame();
     console.log('ゲーム初期化完了');
