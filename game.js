@@ -206,13 +206,20 @@ function drawBlocks() {
 }
 
 // 再開ボタンの設定
+// 再開ボタンの設定（キャンバスが取得できてから座標を更新）
 const restartButton = {
-  x: canvas.width / 2 - 60,
-  y: canvas.height / 2 + 40,
+  x: 0,
+  y: 0,
   width: 120,
   height: 40,
   text: 'RESTART'
 };
+
+function updateRestartButton() {
+  if (!canvas) return;
+  restartButton.x = canvas.width / 2 - restartButton.width / 2;
+  restartButton.y = canvas.height / 2 + 40;
+}
 
 // ゲームオーバーメッセージを表示する関数
 function drawGameOver() {
@@ -433,6 +440,7 @@ window.onload = function() {
     console.log('描画コンテキストを取得しました');
 
     // キャンバスに依存する座標をここで初期化
+    updateRestartButton();
     paddleY = canvas.height - 30;
     paddleX = (canvas.width - PADDLE_WIDTH) / 2;
     ballX = canvas.width / 2;
