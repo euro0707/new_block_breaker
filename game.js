@@ -325,8 +325,10 @@ document.addEventListener('keyup', (e) => {
   }
 });
 
-// クリックイベントリスナー
-canvas.addEventListener('click', (e) => {
+// === Canvas Event Listeners ===
+function attachCanvasEvents() {
+  // クリックイベントリスナー
+  canvas.addEventListener('click', (e) => {
   // ゲームオーバーまたはゲームクリア時のみ再開ボタンを有効にする
   if (gameOver || gameCleared) {
     const rect = canvas.getBoundingClientRect();
@@ -397,9 +399,11 @@ canvas.addEventListener('touchmove', (e) => {
 
 canvas.addEventListener('touchend', (e) => {
   e.preventDefault(); // デフォルトの動作を防止
-  touchX = null;
+    touchX = null;
   lastTouchX = null;
 });
+}
+// === End Canvas Event Listeners ===
 
 // ゲームを初期化する
 function initGame() {
@@ -441,6 +445,7 @@ window.onload = function() {
 
     // キャンバスに依存する座標をここで初期化
     updateRestartButton();
+    attachCanvasEvents();
     paddleY = canvas.height - 30;
     paddleX = (canvas.width - PADDLE_WIDTH) / 2;
     ballX = canvas.width / 2;
